@@ -1,1 +1,3 @@
 # Skillnest_fullstack_phyton
+
+Todas las asignaciones de skillnest del 2026...
