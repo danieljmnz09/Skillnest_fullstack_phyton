@@ -4,7 +4,7 @@ Completa los comentarios en cada línea para relacionarlos
 con los conceptos enumerados en 'reconocer.md'.
 """
 
-import random #Importación de librebiria para procesos aleatorios
+import random #Importación de libreria para procesos aleatorios
 
 nombre = "Frida Kahlo" #Creación de variable tipo string y se asigna un valor
 print(type(nombre)) #Type() = Método de python para mostrar el tipo de una variable
@@ -41,7 +41,7 @@ for i in range(5): #for range: Se crea un bucle en rango 0 a 5
     if i == 2: #Se establece condicion if == 2
         continue #continue ignora el proceso y continua.
 if i == 4: #Se establece condicion if == 4
-    break #Si i = 4 se rompe el bucle
+    #break #Si i = 4 se rompe el bucle
     print(i) #Imprime valor de i en cada interaccion.(hasta 4)
 
 contador = 0 # Se crea una variable contador de tipo numerico(int)
