@@ -18,7 +18,15 @@ def numerosDinamicos():
 def verificador_edad():
     campo = input("Ingrese su año de nacimiento: ")
     edad = 2026 - int(campo)
-    
+    if campo == "":
+        print("Error")
+    elif edad >= 18:
+        print(f"Tienes acceso ya que tu edad es : {edad}")
+    elif edad > 0 and edad < 18:
+        print(f"No tiene acceso: te faltan {18 - edad} años.")
+    else:
+        print("No tiene acceso")
+        verificador_edad()
 
 
 # 3. Calculadora de Descuentos
@@ -26,11 +34,19 @@ def verificador_edad():
 # Si el total supera los $100, aplica un 15% de descuento. Muestra el subtotal, 
 # el descuento aplicado y el total final.
 
+def aplicarDescuento():
+    precio = float(input("Ingrese el precio del producto: "))
+    cantidad = int(input("Ingrese la cantidad comprada: "))
+    producto = precio * cantidad
+    if producto > 100:
+        descuento = producto * 0.15
+    else:
+        descuento = 0
+        total = producto
+        print(f"Subtotal es: ${producto}. El descuento aplicado es: {descuento}. Y el total del producto es: {total}")
 
-
-# 4. Clasificador de Números
+# 4. Clasificador de Números   
 # Pide un número al usuario e indica si es: Positivo-Par, Positivo-Impar, Negativo-Par,
-# Negativo-Impar o Cero.
 
 
 
@@ -40,7 +56,18 @@ def verificador_edad():
 # Solicita un número entero y muestra su tabla de multiplicar del 1 al 12, pero solo muestra 
 # los resultados que sean múltiplos de 3.
 
-
+def clasificadorNum():
+    num = int(input("Ingresar un número: "))
+    if num > 0:
+        if num % 2 == 0:
+            print("Positivo-Par")
+        elif num % 2 == 1:
+            print("Positivo-Impar")
+    elif num < 0:
+        if num % 2 == 0:
+            print("Negativo-Par")
+        elif num % 2 == 1:
+            print("Negativo-Impar")
 
 # 6. Sumatoria con Centinela
 # Crea un programa que pida números continuamente y los sume. 
@@ -108,3 +135,75 @@ def verificador_edad():
 # El promedio semanal.
 # Cuántos días la temperatura fue superior a 25 grados.
 # El día con la temperatura más baja (asumiendo que el índice 0 es Lunes).
+
+container = True 
+while container:
+    print("\n--- Ejercicios Python")
+    print("--- 1.- Ejercicio 1 ---")
+    print("--- 1.- Ejercicio 2 ---")
+    print("--- 1.- Ejercicio 3 ---")
+    print("--- 1.- Ejercicio 4 ---")
+    print("--- 1.- Ejercicio 5 ---")
+    print("--- 1.- Ejercicio 6 ---")
+    print("--- 1.- Ejercicio 7 ---")
+    print("--- 1.- Ejercicio 8 ---")
+    print("--- 1.- Ejercicio 9 ---")
+    print("--- 1.- Ejercicio 10 ---")
+    print("--- 1.- Ejercicio 11 ---")
+    print("--- 1.- Ejercicio 12---")
+    print("--- 1.- Ejercicio 13---")
+    print("--- 1.- Ejercicio 14---")
+    print("--- 1.- Ejercicio 15---")
+
+    opcion = input("\n---- Elige una opción (1-15) o '(0 para salir)= ")
+    if opcion == "1":
+        print("\nEjecutando ejercicio 1: ")
+        print(numerosDinamicos())
+    elif opcion == "2":
+        print("\nEjecutando ejercicio 2: ")
+        print(verificador_edad())
+    elif opcion == "3":
+        print("\nEjecutando ejercicio 3: ")
+        print(aplicarDescuento())
+    elif opcion == "4":
+        print("\nEjecutando ejercicio 3: ")
+        print(clasificadorNum())
+    elif opcion == "5":
+        print("\nEjecutando ejercicio 5: ")
+        print()
+    elif opcion == "6":
+        print("\nEjecutando ejercicio 6: ")
+        print()
+    elif opcion == "7":
+        print("\nEjecutando ejercicio 7: ")
+        print()
+    elif opcion == "8":
+        print("\nEjecutando ejercicio 8: ")
+        print()
+    elif opcion == "9":
+        print("\nEjecutando ejercicio 9: ")
+        print()
+    elif opcion == "10":
+        print("\nEjecutando ejercicio 10: ")
+        print()
+    elif opcion == "11":
+        print("\nEjecutando ejercicio 11: ")
+        print()
+    elif opcion == "12":
+        print("\nEjecutando ejercicio 12: ")
+        print()
+    elif opcion == "13":
+        print("\nEjecutando ejercicio 13: ")
+        print()
+    elif opcion == "14":
+        print("\nEjecutando ejercicio 14: ")
+        print()
+    elif opcion == "15":
+        print("\nEjecutando ejercicio 15: ")
+        print()
+
+    elif opcion == "0":
+        print("Saliendo...") 
+        continuar = False
+    else:
+        print("Opción no válida, intenta otra vez")
