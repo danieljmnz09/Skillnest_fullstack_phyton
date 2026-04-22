@@ -154,7 +154,7 @@ print(horas_de_juego)
 # horas_de_juego         | 150-350
 #
 # Salida: 150, 350
-#
+# 12. Similar al anterior, pero la funcion retorna el valor local 'horas_de_juego'.
 
 
 # 12. Similar al anterior, pero la función retorna el valor local 'horas_de_juego'.
@@ -171,9 +171,8 @@ mostrar_horas_local()
 print(horas_de_juego)
 
 # Variables | Valores
-# 
-# Salida:
-#
+# horas_de_juego | 150 - 350
+# Salida: 150, 150, 350, 350
 
 
 # 13. Ahora reasignamos la variable global con el valor que retorna la función.
@@ -190,10 +189,8 @@ horas_de_juego = mostrar_horas_local()
 print(horas_de_juego)
 
 # Variables | Valores
-# 
-# Salida:
-#
-
+# horas_de_juego | 150 - 350
+# Salida: 150, 150, 350, 350
 
 # 14. Una función que primero muestra la cantidad de seguidores en tu canal, luego llama a otra función para mostrar "Likes".
 def mostrar_seguidores():
@@ -207,8 +204,10 @@ def mostrar_likes():
 mostrar_seguidores()
 
 # Variables | Valores
-# 
-# Salida:
+# horas_de_juego | 150 - 350
+# Salida: 150, 150, 350, 350
+# Salida: Seguidores: 300, Likes: 120, Finalizando conteo
+
 #
 
 
@@ -228,6 +227,6 @@ b = mostrar_reproducciones()
 print(b)
 
 # Variables | Valores
-# 
-# Salida:
-#
+# a         | 4
+# b         | 1
+# Salida: Reproducciones: 5000, Incremento caculado: 1, 4
