@@ -44,14 +44,19 @@ def valores_multiplicados_segundo(lista):
     if len(lista) < 2:
         print(len(lista))
         return []
-    else:
-        pass
-    valores_multiplicados_segundo([100, 3, 50, 20])
+    else:   
+        seEgle = lista[1]
+        nuevaLista = []
+        for i in lista:
+            nuevaLista.append(i * seEgle)
+            long = len(nuevaLista)
+            print(long)
+            return nuevaLista
 # Imprime: 4 y retorna: [300, 9, 150, 60]
-
 def ejercicio4():
-    pass
-    valores_multiplicados_segundo([100])
+    result1 =  valores_multiplicados_segundo([100, 3, 50, 20])
+    print(result1)
+
 # Imprime: 1 y retorna: []
 
 # Ejer 5
@@ -60,8 +65,10 @@ def valor_multiplicado_longitud():
     pass# Debe retornar: [10, 10]
 
 def ejercicio5():
-    valor_multiplicado_longitud(5, 2)
+    result1 = valor_multiplicado_longitud(5, 2)
+    print(f"Resultado 1: {result1}")
     valor_multiplicado_longitud(7, 5)
+    result2 =  print(f"Resultado 2: {result2}")
 # Debe retornar: [35, 35, 35, 35, 35]
 
 
