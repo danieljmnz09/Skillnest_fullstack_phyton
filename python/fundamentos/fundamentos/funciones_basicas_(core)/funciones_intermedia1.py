@@ -38,9 +38,28 @@ print(ubicacion)
 
 # Ejercicio 5
 def iterar_diccionario(lista):
-    nombres = {"nombre": "GameNinjaPro", "nombre": "PixelWarrior"}
-    seguidores = {"seguidores": 250000, "seguidores": 180000}
+    for i in lista:
+        print(f"nombre - {i ['nombre']}, seguidores - {i['seguidores']}")
+    
+iterar_diccionario(streamers)
 
+obtener_valores = {
+    "nombre": [
+        "EliteGamerX",
+        "PixelWarrior",
+    ],
+    "seguidores": [
+        "250000",
+        "180000",
+    ]
+}
+def identar_diccionario(valores):
+    for clave, lista in valores.items():
+        print(f"{len(lista)} {clave.upper()}")
+        for element in lista:
+            print(element)
+        print()    
+identar_diccionario(obtener_valores) 
 
 # Ejercicio 6
 categorias = {
@@ -61,4 +80,5 @@ def identar_diccionario(diccionario):
         print(f"{len(lista)} {clave.upper()}")
         for element in lista:
             print(element)
-identar_diccionario(categorias)
+        print()    
+identar_diccionario(categorias) 
