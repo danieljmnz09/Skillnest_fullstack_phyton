@@ -25,7 +25,7 @@ validar membresías.
 
 class CafeteriaCliente:
     
-    def __init__(self, nombre, puntos_acumulados = 0, saldo_pendiente = 0, membresia="Bronce"):
+    def __init__(self, nombre, puntos_acumulados, saldo_pendiente, membresia="Bronce"):
         
         self.nombre = nombre
         self.puntos_acumulados = puntos_acumulados
@@ -38,14 +38,24 @@ class CafeteriaCliente:
     def realizar_compra(self, monto):
     # TODO:
     # Aumentar saldo pendiente
-        total_pago = self.saldo_pendiente + monto
+        self.saldo_pendiente += monto
+        agregar_compra = input("Quieres agregar alguna compra?(si/no)\n")
+        if agregar_compra == "si":
+            compra = int(input("Cuantas compras quieres agregar?\n"))
+            for i in range(compra):
+                valor_compra = int(input("Ingrese el valor de la compra?\n"))
+                self.saldo_pendiente += valor_compra
+        elif agregar_compra == "no":
+            pass
     # TODO:
     # Aumentar puntos
-    
+        self.saldo_pendiente // 1000
+        self.saldo_pendiente * 10
+        print(f"{self.saldo_pendiente}")
         print(f"{self.nombre} realizó una compra.")
 
 
-usuario1 = CafeteriaCliente("Pedro")
-usuario2 = CafeteriaCliente("Daniel")
+usuario1 = CafeteriaCliente("Pedro", 0, 0)
+usuario2 = CafeteriaCliente("Daniel", 0, 0)
 
 usuario1.realizar_compra(14000)
