@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login y Registro con Sombras</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 50px;
+            gap: 100px; /* Espacio entre las dos columnas */
+            background-color: white;
+        }
+
+        /* Contenedor de cada formulario */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Títulos */
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            margin-top: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Filas del formulario (Label + Input) */
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        /* Etiquetas (Labels) */
+        label {
+            font-weight: bold;
+            font-size: 16px;
+            width: 140px; /* Ancho fijo para alinear los inputs */
+        }
+
+        /* Inputs (Cajas de texto) */
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            border: 3px solid black;
+            padding: 5px;
+            width: 180px;
+            height: 30px;
+            font-size: 14px;
+            background-color: white;
+        }
+
+        /* ESTILO DE LOS BOTONES (ACTUALIZADO CON SOMBRA) */
+        button {
+            border: 3px solid black;
+            background-color: white;
+            padding: 5px 15px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 5px;
+            margin-left: 140px; 
+            width: fit-content;
+            
+            /* AQUÍ ESTÁ LA SOMBRA EXACTA DE LA IMAGEN */
+            /* offset-x | offset-y | blur-radius | color */
+            box-shadow: 4px 4px 0px 0px black;
+            
+            /* Pequeño truco para que al presionar el botón parezca que se hunde */
+            transition: all 0.1s ease;
+        }
+
+        /* Efecto al hacer clic (opcional, para darle realismo) */
+        button:active {
+            transform: translate(4px, 4px); /* Mueve el botón abajo y derecha */
+            box-shadow: 0px 0px 0px 0px black; /* La sombra desaparece al hundirse */
+        }
+
+        /* Ajuste específico para el botón de Registro */
+        .btn-register {
+            padding: 5px 30px;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                gap: 50px;
+                padding: 20px;
+            }
+            .form-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            label {
+                width: auto;
+                margin-bottom: 5px;
+            }
+            button {
+                margin-left: 0;
+                width: 100%;
+            }
+            input[type="text"],
+            input[type="password"],
+            input[type="email"] {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECCIÓN IZQUIERDA: INICIO DE SESIÓN -->
+    <div class="form-container">
+        <h2>Inicio de Sesión</h2>
+        
+        <div class="form-row">
+            <label for="email-login">E-mail</label>
+            <input type="email" id="email-login">
+        </div>
+
+        <div class="form-row">
+            <label for="pass-login">Contraseña</label>
+            <input type="password" id="pass-login">
+        </div>
+
+        <button type="button">Iniciar Sesión</button>
+    </div>
+
+    <!-- SECCIÓN DERECHA: REGISTRO -->
+    <div class="form-container">
+        <h2>Registro</h2>
+
+        <div class="form-row">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre">
+        </div>
+
+        <div class="form-row">
+            <label for="email-reg">E-mail</label>
+            <input type="email" id="email-reg">
+        </div>
+
+        <div class="form-row">
+            <label for="pass-reg">Contraseña</label>
+            <input type="password" id="pass-reg">
+        </div>
+
+        <div class="form-row">
+            <label for="conf-pass">Conf. Contraseña</label>
+            <input type="password" id="conf-pass">
+        </div>
+
+        <button type="button" class="btn-register">Registrar</button>
+    </div>
+
+</body>
+</html>
