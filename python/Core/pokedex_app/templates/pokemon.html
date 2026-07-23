@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="container py-4">
+
+        <!-- ENCABEZADO -->
+        <div class="text-center mb-4">
+            <h1 class="titulo d-flex justify-content-center align-items-center gap-2">
+                <img src="{{ url_for('static', filename='images/pokebola.png') }}" alt="Pokébola"
+                    class="icono-pokebola">
+                Pokédex
+            </h1>
+            <p class="subtitulo">Todos los Pokémon</p>
+            <div class="mt-3 d-flex justify-content-center gap-2">
+                <button class="btn btn-primary btn-custom-blue btn-sm px-3 fw-bold">
+                    <i class="bi bi-list-ul me-1"></i> Ver todos
+                </button>
+                <button class="btn btn-success btn-custom-green btn-sm px-3 fw-bold">
+                    <i class="bi bi-filter me-1"></i> Ver 5 primeros
+                </button>
+            </div>
+        </div>
+
+        <!-- REJILLA DE TARJETAS -->
+        <div class="row justify-content-center g-4">
+
+            {% for pokemon in pokedex %}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="card pokemon-card h-100 p-0">
+
+                    <!-- Fondo Superior con Degradado Diagonal -->
+                    <div class="card-top position-relative d-flex justify-content-center align-items-center">
+                        <span class="pokemon-id-badge position-absolute top-0 end-0 m-3">
+                            #{{ pokemon.id }}
+                        </span>
+
+                        <!-- Imagen Pokémon -->
+                        <!-- Contenedor para centrado y tamaño uniforme de imagen -->
+                        <div class="pokemon-img-container d-flex justify-content-center align-items-center">
+                            <img src="{{ url_for('static', filename='images/' ~ pokemon.imagen) }}"
+                                alt="{{ pokemon.nombre }}" class="pokemon-img">
+                        </div>
+                    </div>
+
+                    <!-- Cuerpo de la Tarjeta -->
+                    <div class="card-body d-flex flex-column text-center p-3">
+                        <h4 class="pokemon-name fw-bold mb-2">{{ pokemon.nombre }}</h4>
+
+                        <!-- Badges de Tipos (Redondeados) -->
+                        <div class="mb-3 d-flex justify-content-center gap-2 flex-wrap">
+                            {% for tipo in pokemon.tipo.split('/') %}
+                            {% if tipo == "Planta" %}
+                            <span class="badge badge-tipo tipo-planta">{{ tipo }}</span>
+                            {% elif tipo == "Veneno" %}
+                            <span class="badge badge-tipo tipo-veneno">{{ tipo }}</span>
+                            {% elif tipo == "Fuego" %}
+                            <span class="badge badge-tipo tipo-fuego">{{ tipo }}</span>
+                            {% elif tipo == "Agua" %}
+                            <span class="badge badge-tipo tipo-agua">{{ tipo }}</span>
+                            {% elif tipo == "Eléctrico" %}
+                            <span class="badge badge-tipo tipo-electrico">{{ tipo }}</span>
+                            {% elif tipo == "Fantasma" %}
+                            <span class="badge badge-tipo tipo-fantasma">{{ tipo }}</span>
+                            {% elif tipo == "Roca" %}
+                            <span class="badge badge-tipo tipo-roca">{{ tipo }}</span>
+                            {% elif tipo == "Tierra" %}
+                            <span class="badge badge-tipo tipo-tierra">{{ tipo }}</span>
+                            {% elif tipo == "Hada" %}
+                            <span class="badge badge-tipo tipo-hada">{{ tipo }}</span>
+                            {% elif tipo == "Normal" %}
+                            <span class="badge badge-tipo tipo-normal">{{ tipo }}</span>
+                            {% else %}
+                            <span class="badge badge-tipo bg-secondary">{{ tipo }}</span>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        <!-- Barra de Poder -->
+                        <div class="w-100 text-start mb-3">
+                            <div class="info-label mb-1 d-flex align-items-center gap-1">
+                                <i class="bi bi-lightning-fill text-secondary"></i> Poder
+                            </div>
+                            <div class="progress custom-progress">
+                                <div class="progress-bar custom-bar" role="progressbar"
+                                    style="width: {{ (pokemon.poder / 150 * 100)|round }}%;">
+                                    <span class="progress-text">{{ pokemon.poder }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Caja Gris con Altura y Peso -->
+                        <div class="row stats-box w-100 m-0 text-center mb-2 align-items-center">
+                            <div class="col">
+                                <div class="stat-label">
+                                    <i class="bi bi-arrows-vertical me-1"></i> Altura
+                                </div>
+                                <div class="stat-value">{{ pokemon.altura }}</div>
+                            </div>
+                            <div class="col">
+                                <div class="stat-label">
+                                    <i class="bi bi-box me-1"></i> Peso
+                                </div>
+                                <div class="stat-value">{{ pokemon.peso }}</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Botón "Ver detalles" separado abajo -->
+                    <div class="card-footer-action">
+                        <button class="btn btn-outline-primary btn-detalles w-100 fw-medium">
+                            Ver detalles
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

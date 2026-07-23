@@ -1,0 +1,251 @@
+/*==========================================
+    1. ESTILOS GENERALES Y FUENTE
+==========================================*/
+body {
+    background-color: #f6f8fc;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #2c3e50;
+}
+
+/* ENCABEZADO */
+.titulo {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #2b55d4;
+    margin-bottom: 2px;
+}
+
+.subtitulo {
+    color: #6c757d;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.icono-pokebola {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+/* BOTONES DE ENCABEZADO */
+.btn-custom-blue {
+    background-color: #2b7cf8;
+    border-color: #2b7cf8;
+    border-radius: 8px;
+    font-size: 0.82rem;
+}
+
+.btn-custom-blue:hover {
+    background-color: #1a62d6;
+}
+
+.btn-custom-green {
+    background-color: #20c997;
+    border-color: #20c997;
+    border-radius: 8px;
+    font-size: 0.82rem;
+}
+
+.btn-custom-green:hover {
+    background-color: #17a57a;
+}
+
+/*==========================================
+    2. TARJETA POKÉMON (IMÁGENES MÁS PEQUEÑAS)
+==========================================*/
+.pokemon-card {
+    border: 1px solid #eef2f7;
+    border-radius: 18px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+    background-color: #ffffff;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pokemon-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+/* Parte Superior (Degradado diagonal azul/gris) */
+.card-top {
+    height: 150px;
+    /* Reducido para ajustarse al nuevo tamaño */
+    background: linear-gradient(135deg, #f0f4f9 0%, #d5e0f0 100%);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Contenedor Fijo Reducido para Imágenes */
+.pokemon-img-container {
+    width: 100px;
+    /* 👈 AQUÍ CONTROLAS EL TAMAÑO: Reducido a 100px */
+    height: 100px;
+    /* 👈 Si aún las quieres más pequeñas, prueba con 85px o 90px */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Imagen Pokémon con Ajuste Proporcional */
+.pokemon-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.12));
+    transition: transform 0.3s ease;
+}
+
+.pokemon-card:hover .pokemon-img {
+    transform: scale(1.08);
+}
+
+/* Badge ID (#1 circular/pill oscuro) */
+.pokemon-id-badge {
+    background-color: #4a4d52;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 12px;
+}
+
+.pokemon-name {
+    font-size: 1.15rem;
+    color: #2d3748;
+    margin-top: 2px;
+}
+
+/*==========================================
+    3. BADGES DE TIPOS (PLANTA / VENENO Y OTROS)
+==========================================*/
+.badge-tipo {
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 5px 18px;
+    border-radius: 14px;
+    color: #ffffff !important;
+    text-transform: capitalize;
+    display: inline-block;
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.15);
+    letter-spacing: 0.2px;
+}
+
+.tipo-planta {
+    background-color: #4cd153 !important;
+}
+
+.tipo-veneno {
+    background-color: #a2389e !important;
+}
+
+.tipo-fuego {
+    background-color: #ff7425 !important;
+}
+
+.tipo-agua {
+    background-color: #468bf0 !important;
+}
+
+.tipo-electrico {
+    background-color: #f7cf1d !important;
+    color: #333333 !important;
+}
+
+.tipo-normal {
+    background-color: #a8a878 !important;
+}
+
+.tipo-hada {
+    background-color: #f286a0 !important;
+}
+
+.tipo-fantasma {
+    background-color: #705898 !important;
+}
+
+.tipo-roca {
+    background-color: #b8a038 !important;
+}
+
+.tipo-tierra {
+    background-color: #e0c068 !important;
+}
+
+/*==========================================
+    4. BARRA DE PODER
+==========================================*/
+.info-label {
+    font-size: 0.78rem;
+    color: #64748b;
+    font-weight: 700;
+}
+
+.custom-progress {
+    height: 14px;
+    background-color: #edf2f7;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.custom-bar {
+    background-color: #3b52d4;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-text {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/*==========================================
+    5. ESTADÍSTICAS (ALTURA Y PESO)
+==========================================*/
+.stats-box {
+    background-color: #f8fafc;
+    border-radius: 12px;
+    padding: 12px 10px;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+/*==========================================
+    6. BOTÓN DETALLES
+==========================================*/
+.card-footer-action {
+    border-top: 1px solid #f1f5f9;
+    padding: 10px 14px 14px 14px;
+}
+
+.btn-detalles {
+    border: 1px solid #3b82f6;
+    color: #2563eb;
+    background-color: #ffffff;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    padding: 6px 0;
+    transition: all 0.2s ease;
+}
+
+.btn-detalles:hover {
+    background-color: #2563eb;
+    color: #ffffff;
+}
