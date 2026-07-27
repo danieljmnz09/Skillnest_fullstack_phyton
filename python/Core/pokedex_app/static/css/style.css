@@ -1,6 +1,4 @@
-/*==========================================
-    1. ESTILOS GENERALES Y FUENTE
-==========================================*/
+/*1. ESTILOS GENERALES Y FUENTE*/
 body {
     background-color: #f6f8fc;
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -50,9 +48,7 @@ body {
     background-color: #17a57a;
 }
 
-/*==========================================
-    2. TARJETA POKÉMON (IMÁGENES MÁS PEQUEÑAS)
-==========================================*/
+/*2. TARJETA POKÉMON (IMÁGENES MÁS PEQUEÑAS)*/
 .pokemon-card {
     border: 1px solid #eef2f7;
     border-radius: 18px;
@@ -120,9 +116,7 @@ body {
     margin-top: 2px;
 }
 
-/*==========================================
-    3. BADGES DE TIPOS (PLANTA / VENENO Y OTROS)
-==========================================*/
+/*3. BADGES DE TIPOS (PLANTA / VENENO Y OTROS)*/
 .badge-tipo {
     font-size: 0.78rem;
     font-weight: 700;
@@ -176,9 +170,7 @@ body {
     background-color: #e0c068 !important;
 }
 
-/*==========================================
-    4. BARRA DE PODER
-==========================================*/
+/*4. BARRA DE PODER*/
 .info-label {
     font-size: 0.78rem;
     color: #64748b;
@@ -206,18 +198,25 @@ body {
     color: #ffffff;
 }
 
-/*==========================================
-    5. ESTADÍSTICAS (ALTURA Y PESO)
-==========================================*/
+/* 5. ESTADÍSTICAS (ALTURA Y PESO)*/
 .stats-box {
     background-color: #f8fafc;
     border-radius: 12px;
     padding: 12px 10px;
 }
 
+.stat-label i {
+    color: #6c757d;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
 .stat-label {
-    font-size: 0.75rem;
-    color: #64748b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    color: #6c757d;
     font-weight: 600;
 }
 
@@ -227,9 +226,7 @@ body {
     color: #1e293b;
 }
 
-/*==========================================
-    6. BOTÓN DETALLES
-==========================================*/
+/* 6. BOTÓN DETALLES*/
 .card-footer-action {
     border-top: 1px solid #f1f5f9;
     padding: 10px 14px 14px 14px;
