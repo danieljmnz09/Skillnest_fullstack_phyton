@@ -1,0 +1,262 @@
+:root {
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-primary: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --primary-blue: #0066ff;
+    --table-header-bg: #1e1e1e;
+    --badge-blue: #007bff;
+    --badge-gray: #6c757d;
+    --cyan-accent: #00d2ff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 860px;
+}
+
+/* Header */
+.page-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.header-title {
+    color: var(--primary-blue);
+    font-size: 2.1rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.header-subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Tarjetas */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    margin-bottom: 20px;
+}
+
+/* Filtros */
+.filter-card {
+    padding: 18px 22px;
+}
+
+.filter-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+}
+
+.filter-form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.filter-group label {
+    font-size: 0.82rem;
+    color: #475569;
+    font-weight: 500;
+}
+
+.filter-group select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    background-color: #fff;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Tabla */
+.table-card {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.data-table thead {
+    background-color: var(--table-header-bg);
+    color: #ffffff;
+}
+
+.data-table th {
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.caret-down {
+    font-size: 0.65rem;
+    margin-left: 4px;
+}
+
+.data-table tbody tr {
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.data-table td {
+    padding: 12px 16px;
+    vertical-align: middle;
+}
+
+/* Columna Marca y Logo */
+.td-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.brand-name {
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.td-year {
+    color: #334155;
+}
+
+/* Insignias */
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: #ffffff;
+}
+
+.badge-blue {
+    background-color: var(--badge-blue);
+}
+
+.badge-gray {
+    background-color: var(--badge-gray);
+}
+
+/* Botón de Detalles (Exacto a la imagen) */
+.btn-info {
+    background: transparent;
+    border: 1.5px solid var(--cyan-accent);
+    border-radius: 6px;
+    width: 26px;
+    height: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.2s;
+}
+
+.btn-info:hover {
+    background-color: #e6faff;
+}
+
+.info-icon-circle {
+    width: 15px;
+    height: 15px;
+    background-color: var(--cyan-accent);
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+    line-height: 1;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Footer de la tabla */
+.table-footer {
+    padding: 12px 16px;
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    border-top: 1px solid #f1f5f9;
+    background-color: #ffffff;
+}
+
+.no-data {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 20px;
+}
+
+/* footer inferior fuera de la tarjeta */
+.site-footer {
+    text-align: center;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.site-footer p {
+    margin: 3px 0;
+}

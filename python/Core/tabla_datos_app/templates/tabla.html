@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataformas Digitales</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="main-container">
+        <!-- Encabezado -->
+        <header class="page-header">
+            <h1 class="header-title">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="header-icon">
+                    <rect width="32" height="32" rx="7" fill="#0066FF" />
+                    <rect x="5" y="5" width="9" height="9" rx="2" fill="white" />
+                    <rect x="18" y="5" width="9" height="9" rx="2" fill="white" />
+                    <rect x="5" y="18" width="9" height="9" rx="2" fill="white" />
+                    <rect x="18" y="18" width="9" height="9" rx="2" fill="white" />
+                </svg>
+                Plataformas Digitales
+            </h1>
+            <p class="header-subtitle">Visualización de datos de las principales plataformas digitales</p>
+        </header>
+
+        <!-- Filtros y Ordenamiento -->
+        <section class="card filter-card">
+            <div class="filter-header">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#1e293b">
+                    <path
+                        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V19l-4 2v-5.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                </svg>
+                <span>Filtros y Ordenamiento</span>
+            </div>
+
+            <form method="GET" action="{{ url_for('inicio') }}" class="filter-form">
+                <div class="filter-group">
+                    <label for="pais">Filtrar por país:</label>
+                    <select name="pais" id="pais" onchange="this.form.submit()">
+                        <option value="todos" {% if pais_sel=='todos' %}selected{% endif %}>Todos los países</option>
+                        {% for pais in paises %}
+                        <option value="{{ pais }}" {% if pais_sel==pais %}selected{% endif %}>{{ pais }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="ordenar">Ordenar por:</label>
+                    <select name="ordenar" id="ordenar" onchange="this.form.submit()">
+                        <option value="nombre" {% if orden_sel=='nombre' %}selected{% endif %}>Nombre</option>
+                        <option value="usuarios" {% if orden_sel=='usuarios' %}selected{% endif %}>Usuarios</option>
+                        <option value="fundado" {% if orden_sel=='fundado' %}selected{% endif %}>Año Fundación</option>
+                        <option value="pais" {% if orden_sel=='pais' %}selected{% endif %}>País</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="direccion">Dirección:</label>
+                    <select name="direccion" id="direccion" onchange="this.form.submit()">
+                        <option value="asc" {% if dir_sel=='asc' %}selected{% endif %}>Ascendente</option>
+                        <option value="desc" {% if dir_sel=='desc' %}selected{% endif %}>Descendente</option>
+                    </select>
+                </div>
+            </form>
+        </section>
+
+        <!-- Tabla de Datos -->
+        <section class="card table-card">
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th class="th-name">
+                                Nombre <span class="caret-down">▼</span>
+                            </th>
+                            <th>Usuarios</th>
+                            <th>Año Fundación</th>
+                            <th>País</th>
+                            <th class="text-center">Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in plataformas %}
+                        <tr>
+                            <!-- 1. Nombre y Logo -->
+                            <td class="td-brand">
+                                {% if item.nombre == 'Discord' %}
+                                <span class="brand-circle" style="background-color: #5865F2;">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="white">
+                                        <path
+                                            d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+                                    </svg>
+                                </span>
+                                {% elif item.nombre == 'Instagram' %}
+                                <span class="brand-circle"
+                                    style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white"
+                                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                    </svg>
+                                </span>
+                                {% elif item.nombre == 'Netflix' %}
+                                <span class="brand-circle" style="background-color: #E50914;">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="white">
+                                        <path d="M5.398 0v24l4.982-2.88V10.231L18.602 24V0l-4.982 2.88v10.889z" />
+                                    </svg>
+                                </span>
+                                {% elif item.nombre == 'Spotify' %}
+                                <span class="brand-circle" style="background-color: #1DB954;">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="white">
+                                        <path
+                                            d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm5.521 17.341c-.217.357-.682.469-1.039.252-2.846-1.74-6.428-2.133-10.65-1.167-.405.093-.811-.161-.904-.566-.093-.405.161-.811.566-.904 4.629-1.058 8.583-.616 11.774 1.336.357.217.469.682.253 1.049zm1.474-3.273c-.273.444-.857.587-1.301.314-3.257-2.002-8.223-2.584-12.077-1.414-.501.152-1.031-.131-1.183-.632-.152-.501.131-1.031.632-1.183 4.412-1.338 9.907-.693 13.615 1.588.444.273.587.857.314 1.327zm.129-3.411c-3.905-2.319-10.347-2.533-14.102-1.393-.6.182-1.237-.163-1.419-.763-.182-.6.163-1.237.763-1.419 4.312-1.309 11.428-1.053 15.908 1.606.539.32.718 1.026.398 1.565-.32.539-1.026.718-1.548.398z" />
+                                    </svg>
+                                </span>
+                                {% elif item.nombre == 'TikTok' %}
+                                <span class="brand-circle" style="background-color: #000000;">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="white">
+                                        <path
+                                            d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.98-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.29-2.63.78-5.26 2.78-6.91 1.41-1.17 3.22-1.77 5.04-1.69.11 1.47.03 2.94.05 4.41-.89-.08-1.8.14-2.58.59-.83.47-1.42 1.28-1.62 2.21-.29 1.18.06 2.47.88 3.32.84.88 2.08 1.32 3.28 1.18 1.23-.1 2.37-.8 2.97-1.88.42-.73.61-1.58.59-2.42V.02z" />
+                                    </svg>
+                                </span>
+                                {% elif item.nombre == 'Twitch' %}
+                                <span class="brand-circle" style="background-color: #9146FF;">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="white">
+                                        <path
+                                            d="M11.571 4.714h1.715v5.143h-1.715zm4.715 0h1.714v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z" />
+                                    </svg>
+                                </span>
+                                {% elif item.nombre == 'YouTube' %}
+                                <span class="brand-circle" style="background-color: #FF0000;">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="white">
+                                        <path
+                                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                    </svg>
+                                </span>
+                                {% endif %}
+                                <span class="brand-name">{{ item.nombre }}</span>
+                            </td>
+
+                            <!-- 2. Usuarios -->
+                            <td>
+                                <span class="badge badge-blue">{{ item.usuarios }}</span>
+                            </td>
+
+                            <!-- 3. Año Fundación -->
+                            <td class="td-year">
+                                {{ item.fundado }}
+                            </td>
+
+                            <!-- 4. País -->
+                            <td>
+                                <span class="badge badge-gray">{{ item.pais }}</span>
+                            </td>
+
+                            <!-- 5. Detalles -->
+                            <td class="text-center">
+                                <button class="btn-info" title="Ver detalles">
+                                    <span class="info-icon-circle">i</span>
+                                </button>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="no-data">No se encontraron plataformas.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                <span>Mostrando {{ total }} plataformas</span>
+            </div>
+        </section>
+
+        <!-- Pie de página inferior -->
+        <footer class="site-footer">
+            <p>Visualización de datos desarrollada con Flask y Bootstrap.</p>
+            <p>Los datos mostrados son ficticios para fines educativos.</p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
