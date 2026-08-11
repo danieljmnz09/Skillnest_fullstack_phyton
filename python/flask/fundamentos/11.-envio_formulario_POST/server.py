@@ -18,7 +18,7 @@ formulario HTML mediante el método POST.
 # render_template:
 # Permite mostrar plantillas HTML.
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 
 # ==========================================
 # Crear aplicación Flask
@@ -40,6 +40,23 @@ def index():
     """
 
     return render_template("index.html")
+
+
+
+@app.route("/crear_usuario", methods= "POST")
+def crear_usuario():
+    print("======== NUEVO USUARIO ========")
+    print(request.form)
+    print("---------------------------------")
+    print("Nombre:", request.form[nombre])
+    print("Correo:", request.form[email])
+    print("Edad", request.form[Edad])
+    print("Telefono", request.form[Telefono])
+    print("---------------------------------")
+   
+    return render_template("index.html")
+
+    #Nunca renderizamos una plantilla
 
 
 # ==========================================
