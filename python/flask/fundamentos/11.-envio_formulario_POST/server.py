@@ -1,29 +1,51 @@
-from flask import Flask, render_template, request, redirect #Agregamos request y redirect
+"""
+===========================================
+Formulario de Prueba
+===========================================
+
+En esta aplicación aprenderemos cómo
+recibir información enviada desde un
+formulario HTML mediante el método POST.
+"""
+
+# ==========================================
+# Importaciones
+# ==========================================
+
+# Flask:
+# Framework principal.
+
+# render_template:
+# Permite mostrar plantillas HTML.
+
+from flask import Flask, render_template
+
+# ==========================================
+# Crear aplicación Flask
+# ==========================================
 
 app = Flask(__name__)
 
-# La ruta raíz renderizará nuestro formulario
+# ==========================================
+# Ruta principal
+# ==========================================
 
-@app.route('/')
-
+@app.route("/")
 def index():
+    """
+    Muestra el formulario al usuario.
 
-   return render_template("index.html")
+    En esta primera parte únicamente
+    renderizaremos la página HTML.
+    """
 
-# /crear_usuario recibe la información
+    return render_template("index.html")
 
-@app.route('/crear_usuario', methods=['POST'])
 
-def crear_usuario():
-
-   print("Recibiendo información")
-
-   print(request.form)
-
-   #JAMAS renderizamos una plantilla ante una solicitud POST
-
-   return redirect('/') #En su lugar, redirigimos a otra ruta
+# ==========================================
+# Ejecutar aplicación
+# ==========================================
 
 if __name__ == "__main__":
 
-   app.run(debug=True)
+    app.run(debug=True)
