@@ -43,15 +43,15 @@ def index():
 
 
 
-@app.route("/crear_usuario", methods= "POST")
+@app.route("/crear_usuario", methods= ["POST"])
 def crear_usuario():
     print("======== NUEVO USUARIO ========")
     print(request.form)
     print("---------------------------------")
-    print("Nombre:", request.form[nombre])
-    print("Correo:", request.form[email])
-    print("Edad", request.form[Edad])
-    print("Telefono", request.form[Telefono])
+    print("nombre:", request.form["nombre"])
+    print("Correo:", request.form["email"])
+    print("Edad", request.form["Edad"])
+    print("Telefono", request.form["Telefono"])
     print("---------------------------------")
    
     return render_template("index.html")
