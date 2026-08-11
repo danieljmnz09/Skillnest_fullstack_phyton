@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado de Frutas</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <style>
+        /* Contenedor de la imagen adaptable */
+        .fruit-img-container {
+            height: 140px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+        /* La imagen se escala proporcionalmente sin deformarse ni desbordarse */
+        .fruit-img-container img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        /* Banner Principal */
+        .hero-banner {
+            background-color: #6c757d;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        /* Estilo para las tarjetas de fruta */
+        .card-fruit {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Columna derecha fija/pegajosa al hacer scroll */
+        .sticky-sidebar {
+            position: sticky;
+            top: 20px;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success py-2">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2 fs-6" href="#">
+                <i class="bi bi-apple"></i> Mercado de Frutas
+            </a>
+            <div class="navbar-nav ms-auto flex-row gap-3">
+                <a class="nav-link text-white active p-0 small" href="#">Inicio</a>
+                <a class="nav-link text-white-50 p-0 small" href="frutas">Catálogo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner Principal Hero -->
+    <div class="hero-banner">
+        <h2 class="fw-bold mb-2">Frutas Frescas a Tu Puerta</h2>
+        <p class="mb-0 text-white-50 small">Selecciona tus frutas favoritas y realiza tu pedido</p>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="container my-4">
+        <form action="{{ url_for('crear_orden') }}" method="POST" id="order-form">
+            <!-- align-items-start alinea perfectamente la parte superior de ambas columnas -->
+            <div class="row g-4 align-items-start">
+
+                <!-- Columna Izquierda: Panel Principal de Frutas -->
+                <div class="col-lg-8">
+                    <div class="bg-white p-4 rounded border shadow-sm">
+                        <h4 class="mb-4 text-dark fs-5 fw-normal">Selecciona tus frutas</h4>
+
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            {% for fruta in frutas %}
+                            <div class="col">
+                                <div class="card card-fruit h-100">
+
+                                    <!-- Contenedor dinámico de imagen -->
+                                    <div class="fruit-img-container">
+                                        <img src="{{ url_for('static', filename='img/' + fruta.imagen) }}"
+                                            alt="{{ fruta.nombre }}">
+                                    </div>
+
+                                    <div class="card-body p-3">
+                                        <h6 class="card-title fw-bold mb-1 text-dark">{{ fruta.nombre }}</h6>
+                                        <div class="text-success fw-bold mb-2 small">${{ "%.1f"|format(fruta.precio) }}
+                                        </div>
+                                        <p class="card-text text-muted mb-0" style="font-size: 0.78rem;">{{
+                                            fruta.descripcion }}</p>
+                                    </div>
+
+                                    <!-- Controles de Cantidad -->
+                                    <div class="card-footer bg-transparent border-top-0 p-3 pt-0">
+                                        <div class="input-group input-group-sm">
+                                            <button
+                                                class="btn btn-outline-secondary bg-light text-dark border-light-subtle btn-minus"
+                                                type="button">-</button>
+                                            <input type="text"
+                                                class="form-control text-center bg-light border-light-subtle fw-bold qty-input"
+                                                name="cantidad_{{ fruta.id }}" value="0" data-price="{{ fruta.precio }}"
+                                                readonly>
+                                            <button
+                                                class="btn btn-outline-secondary bg-light text-dark border-light-subtle btn-plus"
+                                                type="button">+</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Panel de Información de Contacto -->
+                <div class="col-lg-4 sticky-sidebar">
+                    <div class="bg-white p-4 rounded border shadow-sm">
+                        <h4 class="mb-4 text-dark fs-5 fw-normal">Información de Contacto</h4>
+
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label small text-muted mb-1">Nombre</label>
+                            <input type="text" class="form-control form-control-sm bg-light-subtle" id="nombre"
+                                name="nombre" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label small text-muted mb-1">Email</label>
+                            <input type="email" class="form-control form-control-sm bg-light-subtle" id="email"
+                                name="email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="direccion" class="form-label small text-muted mb-1">Dirección de entrega</label>
+                            <textarea class="form-control form-control-sm bg-light-subtle" id="direccion"
+                                name="direccion" rows="3" required></textarea>
+                        </div>
+
+                        <!-- Resumen del Total -->
+                        <div class="bg-light p-3 rounded mb-3 border-0">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="small text-muted fw-semibold">Total de frutas:</span>
+                                <span class="fw-bold small" id="total-frutas">0</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold small">Total a pagar:</span>
+                                <span class="fw-bold text-dark fs-6" id="total-pagar">$0.00</span>
+                            </div>
+                        </div>
+
+                        <!-- Botón Submit -->
+                        <button type="submit" class="btn btn-primary w-100 fw-bold btn-sm py-2">
+                            <i class="bi bi-cart-fill me-1"></i> Crear Orden
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <!-- CÓDIGO JAVASCRIPT PARA INTERACCIÓN Y CÁLCULO DE TOTALES -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const qtyInputs = document.querySelectorAll('.qty-input');
+            const totalFrutasEl = document.getElementById('total-frutas');
+            const totalPagarEl = document.getElementById('total-pagar');
+
+            // Recalcula subtotal e ítems totales
+            function recalculateTotals() {
+                let totalItems = 0;
+                let totalPrice = 0;
+
+                qtyInputs.forEach(input => {
+                    const qty = parseInt(input.value) || 0;
+                    const price = parseFloat(input.dataset.price) || 0;
+
+                    totalItems += qty;
+                    totalPrice += qty * price;
+                });
+
+                totalFrutasEl.textContent = totalItems;
+                totalPagarEl.textContent = `$${totalPrice.toFixed(2)}`;
+            }
+
+            // Evento para el botón +
+            document.querySelectorAll('.btn-plus').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const input = e.target.closest('.input-group').querySelector('.qty-input');
+                    input.value = (parseInt(input.value) || 0) + 1;
+                    recalculateTotals();
+                });
+            });
+
+            // Evento para el botón -
+            document.querySelectorAll('.btn-minus').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const input = e.target.closest('.input-group').querySelector('.qty-input');
+                    let currentVal = parseInt(input.value) || 0;
+                    if (currentVal > 0) {
+                        input.value = currentVal - 1;
+                        recalculateTotals();
+                    }
+                });
+            });
+
+            // Evita enviar el formulario si no se eligió ninguna fruta
+            const orderForm = document.getElementById('order-form');
+            if (orderForm) {
+                orderForm.addEventListener('submit', (e) => {
+                    let totalItems = parseInt(totalFrutasEl.textContent) || 0;
+                    if (totalItems <= 0) {
+                        e.preventDefault();
+                        alert('Por favor selecciona al menos una fruta antes de realizar la orden.');
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>

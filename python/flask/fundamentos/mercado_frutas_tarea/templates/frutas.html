@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado de Frutas - Nuestras Frutas</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <style>
+        /* Banner Principal Hero */
+        .hero-banner {
+            background-color: #6c757d;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        /* Tarjeta de fruta estilo overlay */
+        .fruit-card-catalog {
+            position: relative;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #ffffff;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Contenedor e imagen adaptativa */
+        .fruit-card-catalog img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 15px 15px 40px 15px;
+            /* Espacio para que el texto inferior no tape la fruta */
+        }
+
+        /* Degradado oscuro en la parte inferior de la tarjeta */
+        .fruit-card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 15px 8px 15px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0) 100%);
+            color: white;
+        }
+
+        .fruit-card-overlay .fruit-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        .fruit-card-overlay .fruit-price {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #ff9800;
+            /* Color naranja para el precio */
+            margin: 0;
+        }
+
+        /* Iconos verdes de la sección ¿Por qué elegirnos? */
+        .feature-icon {
+            font-size: 2rem;
+            color: #198754;
+            /* Verde Bootstrap */
+        }
+
+        .feature-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success py-2">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2 fs-6" href="{{ url_for('index') }}">
+                <i class="bi bi-apple"></i> Mercado de Frutas
+            </a>
+            <div class="navbar-nav ms-auto flex-row gap-3">
+                <a class="nav-link text-white-50 p-0 small" href="{{ url_for('index') }}">Inicio</a>
+                <a class="nav-link text-white active p-0 small" href="{{ url_for('frutas_catalogo') }}">Catálogo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner Principal Hero -->
+    <div class="hero-banner">
+        <h2 class="fw-bold mb-2">Nuestras Frutas</h2>
+        <p class="mb-0 text-white-50 small">Descubre nuestra variedad de frutas frescas disponibles</p>
+    </div>
+
+    <!-- Contenido del Catálogo -->
+    <div class="container my-5">
+
+        <!-- Grid de 4 columnas de frutas -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 justify-content-center">
+            {% for fruta in frutas %}
+            <div class="col">
+                <div class="fruit-card-catalog">
+                    <!-- Imagen de la fruta -->
+                    <img src="{{ url_for('static', filename='img/' + fruta.imagen) }}" alt="{{ fruta.nombre }}"
+                        onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=Sin+Imagen';">
+
+                    <!-- Overlay inferior con nombre y precio -->
+                    <div class="fruit-card-overlay">
+                        <p class="fruit-title">{{ fruta.nombre }}</p>
+                        <p class="fruit-price">${{ "%.1f"|format(fruta.precio) }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Botón Centrado "Hacer un pedido" -->
+        <div class="text-center my-4 pt-2">
+            <a href="{{ url_for('index') }}" class="btn btn-primary fw-semibold px-4 py-2 btn-sm shadow-sm">
+                <i class="bi bi-cart-fill me-1"></i> Hacer un pedido
+            </a>
+        </div>
+
+        <!-- Sección: ¿Por qué elegirnos? -->
+        <div class="mt-5 pt-3">
+            <h4 class="text-center fw-normal mb-4 text-dark fs-5">¿Por qué elegirnos?</h4>
+
+            <div class="row g-3 justify-content-center">
+                <!-- Tarjeta 1: Orgánico -->
+                <!-- Tarjeta 1: Orgánico -->
+                <div class="col-md-4">
+                    <div class="feature-card p-4 text-center h-100">
+                        <!-- Reemplazado por Emoji de Hoja -->
+                        <div class="feature-icon mb-2" style="font-size: 2.2rem;">
+                            🍃
+                        </div>
+
+                        <h6 class="fw-bold text-dark mb-2">100% Orgánico</h6>
+                        <p class="text-muted small mb-0" style="font-size: 0.78rem;">
+                            Todas nuestras frutas son cultivadas sin pesticidas ni químicos dañinos.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2: Entrega Rápida -->
+                <div class="col-md-4">
+                    <div class="feature-card p-4 text-center h-100">
+                        <div class="feature-icon mb-2">
+                            <i class="bi bi-truck"></i>
+                        </div>
+                        <h6 class="fw-bold text-dark mb-2">Entrega Rápida</h6>
+                        <p class="text-muted small mb-0" style="font-size: 0.78rem;">
+                            Entregamos en menos de 48 horas para asegurar la máxima frescura.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 3: Calidad Garantizada -->
+                <div class="col-md-4">
+                    <div class="feature-card p-4 text-center h-100">
+                        <div class="feature-icon mb-2">
+                            <i class="bi bi-award"></i>
+                        </div>
+                        <h6 class="fw-bold text-dark mb-2">Calidad Garantizada</h6>
+                        <p class="text-muted small mb-0" style="font-size: 0.78rem;">
+                            Si no estás satisfecho con nuestros productos, te devolvemos tu dinero.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
