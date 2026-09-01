@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuario Registrado</title>
+</head>
+
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Inicio</a> |
+        <a href="{{ url_for('perfil') }}">Perfil</a>
+    </nav>
+    <hr>
+
+    <h1>Usuario registrado</h1>
+    <hr>
+
+    {% if session.get('nombre_usuario') %}
+    <h3>Nombre: {{ session['nombre_usuario'] }}</h3>
+    <h3>E-mail: {{ session['email_usuario'] }}</h3>
+    <h3>Ciudad: {{ session['ciudad_usuario'] }}</h3>
+    {% else %}
+    <p>No se encontraron datos guardados en la sesión.</p>
+    {% endif %}
+
+    <hr>
+    <a href="{{ url_for('index') }}">Volver al formulario</a> |
+    <a href="{{ url_for('perfil') }}">Ir al Perfil</a>
+</body>
+
+</html>

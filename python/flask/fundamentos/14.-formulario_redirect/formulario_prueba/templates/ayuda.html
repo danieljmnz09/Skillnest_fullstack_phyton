@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Ayuda</title>
+</head>
+
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Inicio</a> |
+        <a href="{{ url_for('ayuda') }}">Ayuda</a>
+    </nav>
+    <hr>
+
+    <h1>Guía de Conceptos Web</h1>
+
+    <ul>
+        <li><strong>Solicitud POST:</strong> Envía datos de forma oculta en el cuerpo del mensaje HTTP para guardar o
+            actualizar información en el servidor.</li>
+        <li><strong>Solicitud GET:</strong> Solicita o consulta recursos/páginas al servidor sin modificar el estado de
+            la aplicación.</li>
+        <li><strong>redirect():</strong> Envía una respuesta HTTP (código 302) ordenando al navegador realizar una nueva
+            solicitud a una URL distinta.</li>
+        <li><strong>¿Por qué request.form llega vacío tras un redirect?</strong> Porque `redirect()` genera una nueva
+            petición HTTP independiente de tipo `GET`, destruyendo el cuerpo de la petición `POST` original.</li>
+    </ul>
+
+    <br>
+    <a href="{{ url_for('index') }}">Volver al inicio</a>
+</body>
+
+</html>
