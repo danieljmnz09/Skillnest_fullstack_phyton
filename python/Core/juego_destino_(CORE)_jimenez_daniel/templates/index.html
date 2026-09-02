@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Juego del Destino</title>
+    <!-- Íconos vectoriales de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="card-outer-wrapper">
+        <div class="card-container">
+
+            <header class="card-header">
+                <div class="badge-icon purple-badge">
+                    <i class="fa-solid fa-moon"></i>
+                </div>
+                <h1>El Juego del Destino</h1>
+                <p>Descubre qué te depara el futuro</p>
+            </header>
+
+            <main class="card-body">
+                <form action="{{ url_for('enviar') }}" method="POST">
+
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-user field-icon"></i>
+                            <input type="text" name="nombre" placeholder="Tu nombre" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-calendar-days field-icon"></i>
+                            <input type="number" name="edad" placeholder="Tu edad" min="1" max="120" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-palette field-icon"></i>
+                            <input type="text" name="color" placeholder="Tu color favorito" required>
+                        </div>
+                        <small class="hint">Ej. roja, azul, verde, morado, amarillo...</small>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-paw field-icon"></i>
+                            <input type="text" name="animal" placeholder="Tu animal favorito" required>
+                        </div>
+                        <small class="hint">Ej. perro, gato, águila, león, delfín...</small>
+                    </div>
+
+                    <div class="crystal-ball-container">
+                        <div class="crystal-ball"></div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <i class="fa-solid fa-pen"></i> Revelar mi destino
+                    </button>
+                </form>
+            </main>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

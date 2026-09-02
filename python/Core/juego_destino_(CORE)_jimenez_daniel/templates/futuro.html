@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Destino Revelado</title>
+    <!-- Íconos vectoriales de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="card-outer-wrapper">
+        <div class="card-container">
+
+            <header class="card-header">
+                <div class="badge-icon orange-badge">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+                <h1>Tu Destino ha sido Revelado</h1>
+                <p>Las estrellas han hablado, {{ session.nombre }}</p>
+            </header>
+
+            <main class="card-body">
+
+                <div class="prediction-box">
+                    <i class="fa-solid fa-star star-icon"></i>
+                    <p>{{ session.prediccion }}</p>
+                </div>
+
+                <div class="details-grid">
+
+                    <div class="detail-card">
+                        <div class="detail-header">
+                            <i class="fa-solid fa-palette purple-icon"></i>
+                            <strong>Tu Color</strong>
+                        </div>
+                        <!-- Círculo que carga dinámicamente el color CSS traducido -->
+                        <div class="color-sample" style="background-color: {{ session.color_css }};"></div>
+                        <p class="detail-text">
+                            Tu preferencia por el color <strong>{{ session.color_texto }}</strong> revela tu afinidad
+                            con la <strong>misterio y descubrimiento</strong>.
+                        </p>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-header">
+                            <i class="fa-solid fa-paw purple-icon"></i>
+                            <strong>Tu Animal</strong>
+                        </div>
+                        <p class="detail-text space-top">
+                            Tu conexión con el <strong>{{ session.animal }}</strong> simboliza tu naturaleza de
+                            <strong>independencia y misterio</strong>.
+                        </p>
+                    </div>
+
+                </div>
+
+                <section class="luck-section">
+                    <h3>Tu número de la suerte</h3>
+                    <div class="luck-badge">{{ session.numero_suerte }}</div>
+                    <p class="luck-subtext">Este número te acompañará en momentos importantes.</p>
+                </section>
+
+                <div class="age-box">
+                    A tus <strong>{{ session.edad }} años</strong>, estás en un momento favorable para aprovechar nuevas
+                    oportunidades.
+                </div>
+
+                <a href="{{ url_for('reiniciar') }}" class="btn-primary btn-link">
+                    <i class="fa-solid fa-rotate-right"></i> Consultar de nuevo
+                </a>
+
+                <footer class="card-subfooter">
+                    Las estrellas te han hablado hoy, {{ session.nombre }}.
+                </footer>
+
+            </main>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
