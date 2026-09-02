@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Visitas</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2563eb;
+            display: block;
+        }
+
+        .stat-card .label {
+            font-size: 0.85rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 5px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 20px 0;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        button,
+        .btn {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+
+        .btn-warning {
+            background-color: #f59e0b;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #d97706;
+        }
+
+        .btn-danger {
+            background-color: #ef4444;
+            color: white;
+            width: 100%;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .custom-form {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .custom-form h3 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #374151;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>📊 Contador de Visitas</h1>
+
+        <!-- Tarjetas de estadísticas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="number">{{ session.get('visitas', 0) }}</span>
+                <span class="label">Visitas</span>
+            </div>
+            <div class="stat-card">
+                <span class="number" style="color: #6b7280;">{{ session.get('reinicios', 0) }}</span>
+                <span class="label">Reinicios</span>
+            </div>
+        </div>
+
+        <!-- Botones rápidos (+2 y Reiniciar) -->
+        <div class="btn-group">
+            <form action="/sumar_dos" method="POST">
+                <button type="submit" class="btn-primary">+2 Visitas</button>
+            </form>
+
+            <form action="/reiniciar" method="POST">
+                <button type="submit" class="btn-warning">Reiniciar a 0</button>
+            </form>
+        </div>
+
+        <!-- Incremento personalizado -->
+        <div class="custom-form">
+            <h3>Sumar cantidad personalizada</h3>
+            <form action="/incrementar_custom" method="POST" class="input-group">
+                <input type="number" name="cantidad" min="1" value="1" required>
+                <button type="submit" class="btn-primary">Sumar</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <!-- Destruir Sesión -->
+        <a href="/destruir_sesion" class="btn btn-danger">🔥 Destruir Sesión (Reset Total)</a>
+    </div>
+
+</body>
+
+</html>
