@@ -1,0 +1,250 @@
+/* ==========================================
+   RESET Y CONFIGURACIÓN GENERAL
+   ========================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #e9ecef;
+    color: #333333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px 10px;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ==========================================
+   TARJETA PRINCIPAL DEL JUEGO
+   ========================================== */
+.card-juego {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 20px 20px 0 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Alerta Celeste Superior */
+.alerta-box {
+    background-color: #cff4fc;
+    border: 1px solid #b6effb;
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #055160;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.alerta-icono {
+    background-color: #055160;
+    color: #ffffff;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* Contador de Intentos */
+.intentos-container {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.intentos-badge {
+    background-color: #5c636a;
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    display: inline-block;
+}
+
+/* Botones Numéricos (1 al 10) */
+.numeros-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+    margin-bottom: 20px;
+}
+
+.btn-numero {
+    flex: 1;
+    height: 36px;
+    background-color: #e9ecef;
+    border: none;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #333333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-numero:hover {
+    background-color: #0d6efd;
+    color: #ffffff;
+}
+
+/* Formulario e Inputs */
+.form-juego {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label-eleccion {
+    font-size: 0.9rem;
+    color: #495057;
+    font-weight: 500;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    margin-bottom: 12px;
+}
+
+input[type="number"]:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Botón Adivinar (Gradiente Azul-Púrpura) */
+.btn-adivinar {
+    background: linear-gradient(90deg, #6200ea 0%, #007bff 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.2s ease;
+}
+
+.btn-adivinar:hover {
+    opacity: 0.92;
+}
+
+/* Botón Reiniciar Juego (Rojo) */
+.btn-reiniciar {
+    background-color: #ff3532;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-reiniciar:hover {
+    background-color: #e02d2a;
+}
+
+/* Cajas de Resultado Dinámicas */
+.resultado-box {
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.resultado-box.correcto {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.resultado-box.pista {
+    background-color: #fff3cd;
+    color: #664d03;
+}
+
+.resultado-box.perdio {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+/* Pie de Tarjeta Principal */
+.card-footer {
+    background: linear-gradient(90deg, #6200ea 0%, #007bff 100%);
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.8rem;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+/* ==========================================
+   TARJETA DE REGLAS
+   ========================================== */
+.card-reglas {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+.reglas-titulo {
+    color: #6200ea;
+    font-size: 1.15rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.reglas-lista {
+    padding-left: 20px;
+    color: #6c757d;
+    font-size: 0.88rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.reglas-lista li {
+    line-height: 1.3;
+}

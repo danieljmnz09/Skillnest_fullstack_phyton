@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina el Número</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <!-- TARJETA PRINCIPAL DEL JUEGO -->
+        <main class="card-juego">
+
+            <!-- Alerta Superior -->
+            <div class="alerta-box">
+                <span class="alerta-icono">ℹ</span>
+                <span class="alerta-texto">{{ mensaje }}</span>
+            </div>
+
+            <!-- Contador de Intentos -->
+            <div class="intentos-container">
+                <span class="intentos-badge">
+                    Intentos: <strong>{{ intentos }}</strong>
+                </span>
+            </div>
+
+            <!-- Botones Numéricos (1 al 10) -->
+            <div class="numeros-row">
+                {% for n in range(1, 11) %}
+                <button type="button" class="btn-numero" onclick="document.getElementById('numero').value = {{ n }}">
+                    {{ n }}
+                </button>
+                {% endfor %}
+            </div>
+
+            <!-- Formulario de Entrada -->
+            <form action="{{ url_for('adivinar') }}" method="POST" class="form-juego">
+                <label for="numero" class="label-eleccion">Tu elección:</label>
+                <input type="number" id="numero" name="numero" min="1" max="10" required placeholder="">
+
+                <!-- Botón Adivinar (Gradiente Púrpura-Azul) -->
+                <button type="submit" class="btn-adivinar">
+                    <span class="icon">🔍</span> Adivinar
+                </button>
+            </form>
+
+            <!-- Mensaje de Resultado (Se muestra al adivinar) -->
+            {% if resultado == 'correcto' %}
+            <div class="resultado-box correcto">🎉 ¡Has acertado!</div>
+            {% elif resultado == 'mayor' %}
+            <div class="resultado-box pista">⬆️ El número secreto es mayor.</div>
+            {% elif resultado == 'menor' %}
+            <div class="resultado-box pista">⬇️ El número secreto es menor.</div>
+            {% elif resultado == 'perdio' %}
+            <div class="resultado-box perdio">💥 ¡Juego terminado!</div>
+            {% endif %}
+
+            <!-- Botón Reiniciar Juego (Rojo) -->
+            <a href="{{ url_for('reiniciar') }}" class="btn-reiniciar">
+                <span class="icon">↻</span> Reiniciar Juego
+            </a>
+
+            <!-- Pie de la Tarjeta Principal -->
+            <div class="card-footer">
+                ¡Intenta adivinar el número secreto entre 1 y 10!
+            </div>
+        </main>
+
+        <!-- TARJETA DE REGLAS -->
+        <section class="card-reglas">
+            <h2 class="reglas-titulo">
+                <span class="book-icon">📖</span> Reglas del juego
+            </h2>
+            <ul class="reglas-lista">
+                <li>Se ha generado un número aleatorio entre 1 y 10</li>
+                <li>Debes intentar adivinar cuál es ese número</li>
+                <li>Después de cada intento, recibirás una pista</li>
+                <li>¡Trata de adivinarlo en la menor cantidad de intentos!</li>
+            </ul>
+        </section>
+
+    </div>
+
+</body>
+
+</html>
