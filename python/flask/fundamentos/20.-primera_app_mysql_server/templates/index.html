@@ -2,56 +2,37 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Mascotas</title>
-
+    <title>Lista de Mascotas</title>
 </head>
 
 <body>
 
-    <h1>Las mascotas</h1>
-
+    <h1>Mis Mascotas</h1>
 
     {% if todas_mascotas %}
-
 
     {% for una_mascota in todas_mascotas %}
 
     <div>
+        <h2>{{ una_mascota.nombre }}</h2>
 
         <p>
-
-            <b>Nombre:</b>
-            {{ una_mascota.nombre }}
-
-            <br>
-
-            <b>Tipo:</b>
-            {{ una_mascota.tipo }}
-
-            <br>
-
-            <b>Color:</b>
-            {{ una_mascota.color }}
-
+            Tipo: {{ una_mascota.tipo }}
         </p>
 
+        <p>
+            Color: {{ una_mascota.color }}
+        </p>
     </div>
 
     <hr>
 
     {% endfor %}
 
-
     {% else %}
 
-    <p>
-        No existen mascotas registradas.
-    </p>
+    <p>No hay mascotas registradas.</p>
 
     {% endif %}
 

@@ -12,12 +12,12 @@ class Mascota:
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
 
+
     @classmethod
     def get_all(cls):
 
         query = """
-            SELECT *
-            FROM mascotas;
+            SELECT * FROM mascotas;
         """
 
         resultados = connectToMySQL(
@@ -27,9 +27,30 @@ class Mascota:
         mascotas = []
 
         for mascota in resultados:
-
-            mascotas.append(
-                cls(mascota)
-            )
+            mascotas.append(cls(mascota))
 
         return mascotas
+
+
+    @classmethod
+    def get_perros(cls):
+
+        query = """
+            SELECT * FROM mascotas
+            WHERE tipo = %(tipo)s;
+        """
+
+        data = {
+            "tipo": "Perro"
+        }
+
+        resultados = connectToMySQL(
+            "primera_flask"
+        ).query_db(query, data)
+
+        perros = []
+
+        for mascota in resultados:
+            perros.append(cls(mascota))
+
+        return perros
