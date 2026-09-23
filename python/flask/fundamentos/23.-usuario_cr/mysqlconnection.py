@@ -7,7 +7,7 @@ class MySQLConnection:
         self.connection = pymysql.connect(
             host="localhost",
             user="root",
-            password="1234",  # Cambia si tu MySQL usa otra clave
+            password="1234", 
             database=db,
             charset="utf8mb4",
             cursorclass=pymysql.cursors.DictCursor,
