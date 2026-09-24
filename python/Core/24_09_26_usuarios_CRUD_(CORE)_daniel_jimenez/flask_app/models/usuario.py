@@ -16,7 +16,7 @@ class Usuario:
             FROM usuarios
             ORDER BY id;
         """
-        resultados = connectToMySQL("esquema_usuarios").query_db(query)
+        resultados = connectToMySQL("esquema_usuarioss").query_db(query)
         usuarios = []
         if resultados:
             for usuario in resultados:
