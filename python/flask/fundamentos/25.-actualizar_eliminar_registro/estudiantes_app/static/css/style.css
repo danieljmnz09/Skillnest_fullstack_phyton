@@ -1,0 +1,15 @@
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.acciones {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+}
