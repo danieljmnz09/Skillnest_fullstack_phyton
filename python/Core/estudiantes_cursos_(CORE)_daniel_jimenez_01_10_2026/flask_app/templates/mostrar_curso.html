@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Estudiantes de {{ curso.nombre }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <!-- Titulo dinamico del Curso -->
+        <h2 class="h3 fw-bold mb-4">Estudiantes de {{ curso.nombre }}</h2>
+
+        <!-- Tabla con estilo wireframe -->
+        <table class="table table-bordered align-middle wireframe-table mb-4">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Edad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if curso.estudiantes %}
+                {% for estudiante in curso.estudiantes %}
+                <tr>
+                    <td>{{ estudiante.nombre }}</td>
+                    <td>{{ estudiante.apellido }}</td>
+                    <td>{{ estudiante.edad }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3" class="text-center text-muted">Este curso aún no tiene estudiantes asignados.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+        <!-- Enlace para volver a Inicio -->
+        <div>
+            <a href="{{ url_for('cursos') }}" class="btn-link-action">Inicio</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+# Ocultar el archivo de claves y contraseñas
+.env
+
+# Ignorar archivos temporales de Python
+__pycache__/
+*.pyc
+
+# Ignorar configuración del editor
+.vscode/

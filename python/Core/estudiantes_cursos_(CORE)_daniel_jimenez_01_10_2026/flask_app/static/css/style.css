@@ -1,0 +1,64 @@
+/* Configuración general del fondo y la tipografía */
+body {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Caja con borde para envolver el listado de cursos */
+.cursos-box {
+    border: 2px solid #000000;
+    padding: 15px 20px;
+    min-height: 140px;
+    width: 100%;
+    max-width: 350px;
+}
+
+/* Enlaces estilo wireframe (azules y subrayados) */
+.curso-link, .btn-link-action {
+    color: #0066cc;
+    text-decoration: underline;
+    font-size: 1.05rem;
+}
+
+.curso-link:hover, .btn-link-action:hover {
+    color: #004080;
+}
+
+/* Cajas de texto e inputs con borde negro simple */
+.style-input {
+    border: 1px solid #000000 !important;
+    border-radius: 0px !important;
+    max-width: 250px;
+}
+
+/* Botón de envío con borde simple */
+.btn-outline-dark {
+    border: 2px solid #000000;
+    border-radius: 4px;
+    color: #000000;
+    font-weight: 500;
+}
+
+.btn-outline-dark:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Estilos de la tabla de estudiantes */
+.wireframe-table {
+    border: 2px solid #000000 !important;
+}
+
+/* Encabezado gris de la tabla */
+.wireframe-table th {
+    background-color: #e0e0e0 !important;
+    border-bottom: 2px solid #000000 !important;
+    font-weight: 600;
+}
+
+/* Bordes internos para las celdas de la tabla */
+.wireframe-table td, .wireframe-table th {
+    border: 1px solid #000000 !important;
+    padding: 8px 12px;
+}

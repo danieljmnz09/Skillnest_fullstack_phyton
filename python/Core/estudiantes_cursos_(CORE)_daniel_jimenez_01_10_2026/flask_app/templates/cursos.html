@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Cursos{% endblock %}
+
+{% block content %}
+<div class="row g-5">
+    <!-- Seccion Izquierda: Formulario de Creacion de Curso -->
+    <div class="col-md-5">
+        <h2 class="h3 fw-bold mb-4">Nuevo Curso</h2>
+        <form action="{{ url_for('crear_curso') }}" method="POST">
+            <div class="d-flex align-items-center mb-3">
+                <label for="nombre" class="form-label me-2 mb-0 fw-semibold">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" class="form-control style-input" required>
+            </div>
+            <button type="submit" class="btn btn-outline-dark px-4 shadow-sm">Crear</button>
+        </form>
+    </div>
+
+    <!-- Seccion Derecha: Lista de Cursos -->
+    <div class="col-md-6">
+        <h2 class="h3 fw-bold mb-4">Todos los Cursos</h2>
+
+        <!-- Recuadro con bordes negros que contiene los enlaces -->
+        <div class="cursos-box mb-3">
+            {% if cursos %}
+            <ul class="list-unstyled mb-0">
+                {% for curso in cursos %}
+                <li class="mb-2">
+                    <a href="{{ url_for('mostrar_curso', id=curso.id) }}" class="curso-link">
+                        {{ curso.nombre }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="text-muted mb-0">No hay cursos registrados.</p>
+            {% endif %}
+        </div>
+
+        <!-- Enlace para ir al formulario de estudiante -->
+        <div>
+            <a href="{{ url_for('nuevo_estudiante') }}" class="btn-link-action">Agregar Estudiante</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
