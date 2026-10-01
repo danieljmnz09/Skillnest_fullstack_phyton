@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}{{ libro.title }} | BookHub{% endblock %}
+{% block content %}
+<a class="back-link detail-back" href="{{ url_for('mis_libros') }}"><i class="bi bi-arrow-left"></i> Volver a Mis libros</a>
+<section class="detail-layout">
+  <div class="book-cover" aria-hidden="true"><i class="bi bi-image"></i></div>
+  <div class="detail-main"><span class="genre-tag">{{ libro.genre }}</span><h1>{{ libro.title }}</h1><p class="detail-author">{{ libro.author }}</p><div class="detail-meta"><span><i class="bi bi-calendar3"></i> Publicado el {{ libro.published_on.strftime('%Y-%m-%d') if libro.published_on.strftime is defined else libro.published_on }}</span><span><i class="bi bi-person"></i> Compartido por {{ libro.owner_name }} {{ libro.owner_surname }}</span></div><p class="detail-description">{{ libro.description }}</p>
+  <div class="detail-actions">{% if libro.user_id == usuario.id %}<a class="btn btn-outline-dark" href="{{ url_for('editar_libro', book_id=libro.id) }}"><i class="bi bi-pencil me-1"></i> Editar libro</a>{% else %}<form action="{{ url_for('alternar_favorito', book_id=libro.id) }}" method="post"><button class="btn {{ 'btn-outline-danger' if libro.is_favorite else 'btn-ink' }}" type="submit"><i class="bi {{ 'bi-heart-fill' if libro.is_favorite else 'bi-heart' }} me-1"></i>{{ 'Quitar de favoritos' if libro.is_favorite else 'Agregar a favoritos' }}</button></form>{% endif %}</div>
+  </div>
+</section>
+<section class="reader-section"><div class="reader-heading"><div><span class="eyebrow">Lecturas compartidas</span><h2>En favoritos de {{ comunidad|length }} {{ 'lector' if comunidad|length == 1 else 'lectores' }}</h2></div><span class="reader-count"><i class="bi bi-heart-fill"></i> {{ libro.favorite_count }}</span></div>{% if comunidad %}<ul class="reader-list">{% for persona in comunidad %}<li><span class="reader-avatar">{{ persona.name[0]|upper }}{{ persona.surname[0]|upper }}</span><span>{{ persona.name }} {{ persona.surname }}</span></li>{% endfor %}</ul>{% else %}<p class="text-muted mb-0">Aún no hay lectores que lo hayan guardado.</p>{% endif %}</section>
+{% endblock %}

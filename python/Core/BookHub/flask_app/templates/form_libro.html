@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar libro' if libro else 'Nuevo libro' }} | BookHub{% endblock %}
+{% block content %}
+<section class="form-page-head"><a class="back-link" href="{{ url_for('mis_libros') }}"><i class="bi bi-arrow-left"></i> Volver a Mis libros</a><span class="eyebrow">Tu biblioteca</span><h1>{{ 'Editar libro' if libro else 'Agregar nuevo libro' }}</h1><p>Los campos marcados con * son obligatorios.</p></section>
+<form class="book-form" method="post" action="{{ url_for('editar_libro', book_id=libro.id) if libro else url_for('nuevo_libro') }}">
+  <div class="row g-3"><div class="col-md-6"><label class="form-label" for="title">Título *</label><input class="form-control" id="title" name="title" required maxlength="160" value="{{ libro.title if libro else '' }}"></div><div class="col-md-6"><label class="form-label" for="author">Autor *</label><input class="form-control" id="author" name="author" required maxlength="120" value="{{ libro.author if libro else '' }}"></div>
+  <div class="col-md-6"><label class="form-label" for="genre">Género *</label><select class="form-select" id="genre" name="genre" required><option value="">Selecciona un género</option>{% for genero in ['Ficción', 'Ciencia ficción', 'Fantasía', 'Misterio', 'Romance', 'No ficción', 'Desarrollo personal', 'Historia', 'Poesía', 'Otro'] %}<option value="{{ genero }}" {% if libro and libro.genre == genero %}selected{% endif %}>{{ genero }}</option>{% endfor %}</select></div>
+  <div class="col-md-6"><label class="form-label" for="published_on">Fecha de publicación *</label><input class="form-control" type="date" id="published_on" name="published_on" max="{{ hoy }}" required value="{{ libro.published_on.isoformat() if libro and libro.published_on.isoformat is defined else (libro.published_on if libro else '') }}"></div>
+  <div class="col-12"><label class="form-label" for="description">Descripción *</label><textarea class="form-control" id="description" name="description" rows="5" maxlength="3000" required placeholder="¿Qué hace especial a este libro?">{{ libro.description if libro else '' }}</textarea></div></div>
+  <div class="form-actions"><button class="btn btn-ink" type="submit">{{ 'Actualizar' if libro else 'Guardar libro' }}</button><a class="btn btn-link text-dark" href="{{ url_for('mis_libros') }}">Cancelar</a></div>
+</form>
+{% endblock %}

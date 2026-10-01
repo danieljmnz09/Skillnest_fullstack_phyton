@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Mis favoritos | BookHub{% endblock %}
+{% block content %}
+<section class="page-heading"><div><span class="eyebrow">Guardados para después</span><h1>Mis libros favoritos</h1><p>Una lista personal de historias que quieres recordar.</p></div></section>
+<section class="table-section">
+  {% if libros %}<div class="table-toolbar"><span class="result-count">{{ libros|length }} {{ 'libro guardado' if libros|length == 1 else 'libros guardados' }}</span></div><div class="table-responsive"><table class="table book-table align-middle"><thead><tr><th>Título</th><th>Autor</th><th>Género</th><th>Fecha</th><th class="text-center">Favoritos</th><th class="text-end">Acción</th></tr></thead><tbody>{% for libro in libros %}<tr><td><a class="book-title-link" href="{{ url_for('detalle_libro', book_id=libro.id) }}">{{ libro.title }}</a><small class="d-block text-muted">Por {{ libro.owner_name }} {{ libro.owner_surname }}</small></td><td>{{ libro.author }}</td><td><span class="genre-tag">{{ libro.genre }}</span></td><td>{{ libro.published_on.strftime('%Y-%m-%d') if libro.published_on.strftime is defined else libro.published_on }}</td><td class="text-center">{{ libro.favorite_count }}</td><td><div class="row-actions"><a class="action-link" href="{{ url_for('detalle_libro', book_id=libro.id) }}">Ver</a><form action="{{ url_for('alternar_favorito', book_id=libro.id) }}" method="post"><button class="action-link danger-link" type="submit">Quitar</button></form></div></td></tr>{% endfor %}</tbody></table></div>
+  {% else %}<div class="empty-state"><span class="empty-icon"><i class="bi bi-heart"></i></span><h2>Tu lista todavía está vacía</h2><p>Explora la biblioteca y guarda los libros que quieras tener a mano.</p><a class="btn btn-ink" href="{{ url_for('explorar') }}">Explorar libros</a></div>{% endif %}
+</section>
+{% endblock %}

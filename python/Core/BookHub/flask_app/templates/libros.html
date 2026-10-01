@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}{% if vista == 'mios' %}Mis libros{% else %}Explorar{% endif %} | BookHub{% endblock %}
+{% block content %}
+<section class="page-heading">
+  <div><span class="eyebrow">{{ 'Tu colección personal' if vista == 'mios' else 'La biblioteca de la comunidad' }}</span><h1>{{ 'Mis libros' if vista == 'mios' else 'Explorar libros' }}</h1><p>{{ 'Todos tus títulos, organizados en un solo lugar.' if vista == 'mios' else 'Historias compartidas por lectores de BookHub.' }}</p></div>
+  {% if vista == 'mios' %}<a class="btn btn-primary" href="{{ url_for('nuevo_libro') }}"><i class="bi bi-plus-lg me-1"></i> Nuevo libro</a>{% endif %}
+</section>
+<section class="table-section">
+  <div class="table-toolbar"><form class="search-form" role="search"><i class="bi bi-search"></i><input class="form-control" type="search" name="q" value="{{ busqueda }}" placeholder="Buscar por título, autor o género" aria-label="Buscar libros"><button class="btn btn-outline-dark" type="submit">Buscar</button></form><span class="result-count">{{ libros|length }} {{ 'resultado' if libros|length == 1 else 'resultados' }}</span></div>
+  {% if libros %}
+  <div class="table-responsive"><table class="table book-table align-middle"><thead><tr><th>Título</th><th>Autor</th><th>Género</th><th>Publicado</th><th class="text-center">Favoritos</th><th class="text-end">Acción</th></tr></thead><tbody>
+    {% for libro in libros %}<tr><td><a class="book-title-link" href="{{ url_for('detalle_libro', book_id=libro.id) }}">{{ libro.title }}</a>{% if vista == 'comunidad' %}<small class="d-block text-muted">Por {{ libro.owner_name }} {{ libro.owner_surname }}</small>{% endif %}</td><td>{{ libro.author }}</td><td><span class="genre-tag">{{ libro.genre }}</span></td><td>{{ libro.published_on.strftime('%Y-%m-%d') if libro.published_on.strftime is defined else libro.published_on }}</td><td class="text-center">{{ libro.favorite_count }}</td><td><div class="row-actions">
+      {% if vista == 'mios' %}<a class="action-link" href="{{ url_for('editar_libro', book_id=libro.id) }}" aria-label="Editar {{ libro.title }}">Editar</a><form action="{{ url_for('eliminar_libro', book_id=libro.id) }}" method="post" onsubmit="return confirm('¿Eliminar este libro?')"><button class="action-link danger-link" type="submit">Borrar</button></form>{% else %}<form action="{{ url_for('alternar_favorito', book_id=libro.id) }}" method="post"><button class="favorite-button {% if libro.is_favorite %}is-favorite{% endif %}" type="submit" aria-label="{{ 'Quitar de' if libro.is_favorite else 'Agregar a' }} favoritos"><i class="bi {{ 'bi-heart-fill' if libro.is_favorite else 'bi-heart' }}"></i></button></form>{% endif %}
+    </div></td></tr>{% endfor %}
+  </tbody></table></div>
+  {% else %}<div class="empty-state"><span class="empty-icon"><i class="bi bi-journal-bookmark"></i></span><h2>{{ 'Todavía no hay libros en tu colección' if vista == 'mios' else 'No encontramos libros con esa búsqueda' }}</h2><p>{{ 'Agrega tu primer título y empieza a construir tu biblioteca.' if vista == 'mios' else 'Prueba con otro título, autor o género.' }}</p>{% if vista == 'mios' %}<a class="btn btn-ink" href="{{ url_for('nuevo_libro') }}">Agregar un libro</a>{% endif %}</div>{% endif %}
+</section>
+{% if vista == 'mios' %}
+<section class="community-block">
+  <div class="community-heading"><div><span class="eyebrow">Descubre nuevas lecturas</span><h2>Libros de la comunidad</h2></div><a class="action-link" href="{{ url_for('explorar') }}">Ver todos <i class="bi bi-arrow-right"></i></a></div>
+  <div class="table-section">
+    {% if comunidad %}<div class="table-responsive"><table class="table book-table align-middle"><thead><tr><th>Título</th><th>Autor</th><th>Género</th><th>Publicado</th><th class="text-center">Favoritos</th><th class="text-end">Acción</th></tr></thead><tbody>
+      {% for libro in comunidad %}<tr><td><a class="book-title-link" href="{{ url_for('detalle_libro', book_id=libro.id) }}">{{ libro.title }}</a><small class="d-block text-muted">Por {{ libro.owner_name }} {{ libro.owner_surname }}</small></td><td>{{ libro.author }}</td><td><span class="genre-tag">{{ libro.genre }}</span></td><td>{{ libro.published_on.strftime('%Y-%m-%d') if libro.published_on.strftime is defined else libro.published_on }}</td><td class="text-center">{{ libro.favorite_count }}</td><td><div class="row-actions"><a class="action-link" href="{{ url_for('detalle_libro', book_id=libro.id) }}">Ver</a></div></td></tr>{% endfor %}
+    </tbody></table></div>{% else %}<p class="community-empty">Todavía no hay libros compartidos por otros lectores.</p>{% endif %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}
