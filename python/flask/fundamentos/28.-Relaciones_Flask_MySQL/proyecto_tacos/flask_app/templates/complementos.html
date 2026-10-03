@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Complementos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Gestión de Complementos</h1>
+            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Crear Taco</a>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card p-4 shadow-sm">
+                    <h3>Crear Nuevo Complemento</h3>
+                    <form action="{{ url_for('crear_complemento') }}" method="POST">
+                        <div class="mb-3">
+                            <label for="nombre_complemento" class="form-label">Nombre del complemento</label>
+                            <input type="text" id="nombre_complemento" name="nombre_complemento" class="form-control"
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Complemento</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card p-4 shadow-sm">
+                    <h3>Asociar Complemento a Taco</h3>
+                    <form action="{{ url_for('asociar_complemento') }}" method="POST">
+                        <div class="mb-3">
+                            <label for="complemento_id" class="form-label">Complemento</label>
+                            <select name="complemento_id" id="complemento_id" class="form-select" required>
+                                <option value="">Selecciona un complemento</option>
+                                {% for comp in complementos %}
+                                <option value="{{ comp.id }}">{{ comp.nombre_complemento }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="taco_id" class="form-label">Taco</label>
+                            <select name="taco_id" id="taco_id" class="form-select" required>
+                                <option value="">Selecciona un taco</option>
+                                {% for taco in tacos %}
+                                <option value="{{ taco.id }}">Taco de {{ taco.guiso }} ({{ taco.tortilla }})</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">Asociar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="mt-5 mb-3">Lista de Complementos</h2>
+        <div class="list-group">
+            {% for comp in complementos %}
+            <a href="{{ url_for('ver_complemento', id=comp.id) }}"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                {{ comp.nombre_complemento }}
+                <span class="badge bg-primary rounded-pill">Ver Tacos</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

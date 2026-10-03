@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle: {{ complemento.nombre_complemento }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Complemento: {{ complemento.nombre_complemento }}</h1>
+            <a href="{{ url_for('index_complementos') }}" class="btn btn-outline-secondary">Volver a Complementos</a>
+        </div>
+
+        <h3>Tacos que llevan este complemento:</h3>
+
+        {% if complemento.en_tacos %}
+        <div class="row g-3 mt-2">
+            {% for taco in complemento.en_tacos %}
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Taco de {{ taco.guiso }}</h5>
+                        <p class="card-text">
+                            <strong>Tortilla:</strong> {{ taco.tortilla }}<br>
+                            <strong>Salsa:</strong> {{ taco.salsa }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="alert alert-info mt-3">
+            Este complemento aún no se ha agregado a ningún taco.
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

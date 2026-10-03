@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ restaurante.nombre }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1>{{ restaurante.nombre }}</h1>
+                <p class="text-muted">ID: {{ restaurante.id }}</p>
+            </div>
+            <a href="{{ url_for('restaurantes') }}" class="btn btn-outline-secondary">Volver a Restaurantes</a>
+        </div>
+
+        <h2 class="h4 mb-3">Tacos disponibles</h2>
+        {% if restaurante.tacos %}
+        <div class="row g-4">
+            {% for taco in restaurante.tacos %}
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="h5">Taco de {{ taco.guiso }}</h3>
+                        <ul class="list-group list-group-flush mt-3">
+                            <li class="list-group-item"><strong>Tortilla:</strong> {{ taco.tortilla }}</li>
+                            <li class="list-group-item"><strong>Salsa:</strong> {{ taco.salsa }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="alert alert-warning">Este restaurante aún no tiene tacos asociados.</div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
