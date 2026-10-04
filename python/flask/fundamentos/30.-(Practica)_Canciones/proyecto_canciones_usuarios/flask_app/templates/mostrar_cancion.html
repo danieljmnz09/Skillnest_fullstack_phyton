@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Canción: {{ cancion.titulo }}{% endblock %}
+
+{% block content %}
+<h1 class="display-5 fw-bold mb-1">{{ cancion.titulo }}</h1>
+<p class="h4 text-muted mb-4">{{ cancion.artista }}</p>
+
+<div class="row g-5">
+    <!-- Lista de usuarios a quienes les gusta la canción -->
+    <div class="col-md-6">
+        <h2 class="h5 fw-bold mb-3">En los favoritos de:</h2>
+        {% if cancion.usuarios_favoritos %}
+        <ul class="list-unstyled mb-4">
+            {% for usuario in cancion.usuarios_favoritos %}
+            <li class="mb-1">- {{ usuario.nombre }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted mb-4">Ningún usuario la ha marcado como favorita aún.</p>
+        {% endif %}
+
+        <div>
+            <a href="{{ url_for('usuarios') }}" class="btn-link-action">Inicio</a>
+        </div>
+    </div>
+
+    <!-- Menú desplegable para agregar usuario (Filtrado con BONUS) -->
+    <div class="col-md-5">
+        <h2 class="h4 fw-bold mb-3">Agregar Favorito</h2>
+        <form action="{{ url_for('agregar_favorito_cancion') }}" method="POST">
+            <input type="hidden" name="cancion_id" value="{{ cancion.id }}">
+
+            <div class="d-flex align-items-center mb-3">
+                <label for="usuario_id" class="me-2 fw-semibold">Usuario:</label>
+                <select id="usuario_id" name="usuario_id" class="form-select style-input" required>
+                    {% if usuarios_disponibles %}
+                    {% for usuario in usuarios_disponibles %}
+                    <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
+                    {% endfor %}
+                    {% else %}
+                    <option value="" disabled selected>Sin usuarios disponibles</option>
+                    {% endif %}
+                </select>
+            </div>
+
+            {% if usuarios_disponibles %}
+            <button type="submit" class="btn btn-outline-dark px-4 shadow-sm">Agregar</button>
+            {% endif %}
+        </form>
+    </div>
+</div>
+{% endblock %}

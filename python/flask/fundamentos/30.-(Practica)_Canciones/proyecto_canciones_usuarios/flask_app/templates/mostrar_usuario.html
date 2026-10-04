@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Usuario: {{ usuario.nombre }}{% endblock %}
+
+{% block content %}
+<h1 class="display-5 fw-bold mb-4">{{ usuario.nombre }}</h1>
+
+<div class="row g-5">
+    <!-- Tabla de canciones favoritas -->
+    <div class="col-md-6">
+        <h2 class="h4 fw-bold mb-3">Favoritos</h2>
+        <table class="table table-bordered align-middle wireframe-table mb-4">
+            <thead>
+                <tr>
+                    <th>Canción</th>
+                    <th>Artista</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if usuario.canciones_favoritas %}
+                {% for cancion in usuario.canciones_favoritas %}
+                <tr>
+                    <td>{{ cancion.titulo }}</td>
+                    <td>{{ cancion.artista }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="2" class="text-center text-muted">Aún no tiene canciones favoritas.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+        <div>
+            <a href="{{ url_for('usuarios') }}" class="btn-link-action">Inicio</a>
+        </div>
+    </div>
+
+    <!-- Menú desplegable para agregar favorita (Filtrado con BONUS) -->
+    <div class="col-md-5">
+        <h2 class="h4 fw-bold mb-3">Agregar Favorito</h2>
+        <form action="{{ url_for('agregar_favorito_usuario') }}" method="POST">
+            <input type="hidden" name="usuario_id" value="{{ usuario.id }}">
+
+            <div class="d-flex align-items-center mb-3">
+                <label for="cancion_id" class="me-2 fw-semibold">Canción:</label>
+                <select id="cancion_id" name="cancion_id" class="form-select style-input" required>
+                    {% if canciones_disponibles %}
+                    {% for cancion in canciones_disponibles %}
+                    <option value="{{ cancion.id }}">{{ cancion.titulo }}</option>
+                    {% endfor %}
+                    {% else %}
+                    <option value="" disabled selected>Sin canciones disponibles</option>
+                    {% endif %}
+                </select>
+            </div>
+
+            {% if canciones_disponibles %}
+            <button type="submit" class="btn btn-outline-dark px-4 shadow-sm">Agregar</button>
+            {% endif %}
+        </form>
+    </div>
+</div>
+{% endblock %}
