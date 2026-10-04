@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del Estudiante</title>
+</head>
+
+<body>
+    <h1>{{ estudiante.nombre }}</h1>
+    <p>Email: {{ estudiante.email }}</p>
+
+    <h2>Cursos Inscritos</h2>
+    {% if estudiante.cursos %}
+    <ul>
+        {% for curso in estudiante.cursos %}
+        <li>{{ curso.nombre_curso }} - {{ curso.descripcion }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Este estudiante no está inscrito en ningún curso.</p>
+    {% endif %}
+
+    <a href="/">Volver al inicio</a>
+</body>
+
+</html>
