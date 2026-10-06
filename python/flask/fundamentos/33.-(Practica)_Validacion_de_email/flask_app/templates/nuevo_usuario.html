@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            padding-top: 40px;
+        }
+
+        .contenedor {
+            background-color: #fff;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #111;
+        }
+
+        .error-msg {
+            color: #d9534f;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #000;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        .btn-submit {
+            background-color: #f8f9fa;
+            border: 2px solid #000;
+            padding: 6px 18px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn-submit:hover {
+            background-color: #e2e6ea;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+        <h1>Crear nuevo usuario</h1>
+
+        <!-- Mensajes Flash de error -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="error-msg">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form action="/usuarios/crear" method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <!-- Conserva los valores en caso de redirección por error -->
+                <input type="text" id="nombre" name="nombre"
+                    value="{{ session['datos_formulario']['nombre'] if session.get('datos_formulario') else '' }}">
+            </div>
+
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido"
+                    value="{{ session['datos_formulario']['apellido'] if session.get('datos_formulario') else '' }}">
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="text" id="email" name="email"
+                    value="{{ session['datos_formulario']['email'] if session.get('datos_formulario') else '' }}">
+            </div>
+
+            <button type="submit" class="btn-submit">Crear</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
