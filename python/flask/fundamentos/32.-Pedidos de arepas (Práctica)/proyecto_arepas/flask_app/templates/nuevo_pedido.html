@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Pedido</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-white">
+    <div class="container py-4" style="max-width: 500px;">
+
+        <h1 class="fw-bold mb-3">Nuevo Pedido</h1>
+
+        <!-- Mensajes de error en rojo debajo del título -->
+        {% with mensajes = get_flashed_messages(category_filter=["pedido_error"]) %}
+        {% if mensajes %}
+        <div class="text-danger fw-bold mb-3">
+            {% for msg in mensajes %}
+            <p class="mb-1">{{ msg }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <form action="/pedidos/crear" method="POST">
+            <div class="mb-3 row align-items-center">
+                <label for="nombre" class="col-sm-4 col-form-label fw-bold">Nombre Cliente:</label>
+                <div class="col-sm-8">
+                    <input type="text" id="nombre" name="nombre" class="form-control border-dark">
+                </div>
+            </div>
+
+            <div class="mb-3 row align-items-center">
+                <label for="cantidad" class="col-sm-4 col-form-label fw-bold">Cantidad:</label>
+                <div class="col-sm-8">
+                    <input type="number" id="cantidad" name="cantidad" class="form-control border-dark">
+                </div>
+            </div>
+
+            <div class="mb-3 row align-items-center">
+                <label for="relleno" class="col-sm-4 col-form-label fw-bold">Relleno:</label>
+                <div class="col-sm-8">
+                    <input type="text" id="relleno" name="relleno" class="form-control border-dark">
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-outline-dark border-2 px-4 shadow-sm fw-bold">Crear Pedido</button>
+            </div>
+        </form>
+
+        <div class="mt-4">
+            <a href="/arepas" class="text-primary text-decoration-underline">Inicio</a>
+        </div>
+
+    </div>
+</body>
+
+</html>
