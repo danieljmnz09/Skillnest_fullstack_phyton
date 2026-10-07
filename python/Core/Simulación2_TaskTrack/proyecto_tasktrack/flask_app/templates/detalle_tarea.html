@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TaskTrack - Detalle de Tarea</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand navbar-dark bg-dark px-4">
+        <a class="navbar-brand fw-bold" href="/tareas">✓ TaskTrack</a>
+    </nav>
+
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>{{ tarea.titulo }}</h2>
+            <span class="badge bg-warning text-dark p-2">Información completa de la tarea</span>
+        </div>
+
+        <div class="mb-3"><strong>Categoría:</strong> <span class="badge bg-secondary">{{ tarea.categoria_nombre
+                }}</span></div>
+        <div class="mb-3"><strong>Prioridad:</strong> <span class="badge bg-danger">{{ tarea.prioridad }}</span></div>
+        <div class="mb-3"><strong>Estado:</strong> <span class="badge bg-info text-dark">{{ tarea.estado }}</span></div>
+        <div class="mb-3"><strong>Fecha límite:</strong> {{ tarea.fecha_limite }}</div>
+        <div class="mb-3"><strong>Creado el:</strong> {{ tarea.created_at.strftime('%Y-%m-%d %H:%M') if tarea.created_at
+            else '' }}</div>
+        <div class="mb-4"><strong>Descripción:</strong>
+            <p class="text-muted">{{ tarea.descripcion }}</p>
+        </div>
+
+        <div class="d-flex gap-2 mb-3">
+            <a href="/tareas/editar/{{ tarea.id }}" class="btn btn-primary">Editar</a>
+
+            {% if tarea.estado != 'Completada' %}
+            <form action="/tareas/{{ tarea.id }}/completar" method="POST">
+                <button type="submit" class="btn btn-success">Marcar como Completada</button>
+            </form>
+            {% endif %}
+
+            <form action="/tareas/{{ tarea.id }}/borrar" method="POST">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Borrar tarea?')">Borrar</button>
+            </form>
+        </div>
+
+        <a href="/tareas" class="btn btn-link p-0 text-decoration-none">← Volver a Mis Tareas</a>
+    </div>
+</body>
+
+</html>

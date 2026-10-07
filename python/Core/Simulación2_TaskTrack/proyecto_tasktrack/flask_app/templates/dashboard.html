@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TaskTrack - Mis Tareas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Barra de Navegación superior -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark px-4">
+        <a class="navbar-brand fw-bold" href="/tareas">✓ TaskTrack</a>
+        <div class="navbar-nav me-auto">
+            <a class="nav-link active" href="/tareas">Mis Tareas</a>
+            <a class="nav-link" href="/categorias">Categorías</a>
+        </div>
+        <div class="text-white me-3">Hola, {{ session['nombre'] }}</div>
+        <a href="/logout" class="btn btn-outline-light btn-sm">Cerrar Sesión</a>
+    </nav>
+
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Mis Tareas</h2>
+            <a href="/tareas/nueva" class="btn btn-primary">+ Nueva Tarea</a>
+        </div>
+
+        <!-- Tabla de tareas -->
+        <table class="table table-bordered align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Título</th>
+                    <th>Categoría</th>
+                    <th>Prioridad</th>
+                    <th>Fecha Límite</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in tareas %}
+                <tr>
+                    <td>{{ t.titulo }}</td>
+                    <td><span class="badge bg-secondary">{{ t.categoria_nombre }}</span></td>
+                    <td>
+                        <span
+                            class="badge {% if t.prioridad == 'Alta' %}bg-danger{% elif t.prioridad == 'Media' %}bg-warning text-dark{% else %}bg-info text-dark{% endif %}">
+                            {{ t.prioridad }}
+                        </span>
+                    </td>
+                    <td>{{ t.fecha_limite }}</td>
+                    <td>
+                        <span
+                            class="badge {% if t.estado == 'Completada' %}bg-success{% elif t.estado == 'En progreso' %}bg-primary{% else %}bg-secondary{% endif %}">
+                            {{ t.estado }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="/tareas/{{ t.id }}" class="btn btn-link p-0 text-decoration-none">Ver</a>
+                        <a href="/tareas/editar/{{ t.id }}" class="btn btn-link p-0 text-decoration-none">Editar</a>
+                        <form action="/tareas/{{ t.id }}/borrar" method="POST" class="d-inline">
+                            <button class="btn btn-link p-0 text-danger text-decoration-none"
+                                onclick="return confirm('¿Borrar tarea?')">Borrar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">No hay tareas registradas.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="row mt-4">
+            <!-- Próximas tareas -->
+            <div class="col-md-7">
+                <h4>Próximas tareas</h4>
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Fecha Límite</th>
+                            <th>Días restantes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in proximas %}
+                        <tr>
+                            <td>{{ p.titulo }}</td>
+                            <td>{{ p.fecha_limite }}</td>
+                            <td>{{ p.dias_restantes }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Resumen -->
+            <div class="col-md-5">
+                <div class="card p-3 bg-light">
+                    <h4>Resumen</h4>
+                    <p class="mb-1">Total de tareas: <strong>{{ resumen.total }}</strong></p>
+                    <p class="mb-1">Pendientes: <strong>{{ resumen.pendientes }}</strong></p>
+                    <p class="mb-1">En progreso: <strong>{{ resumen.en_progreso }}</strong></p>
+                    <p class="mb-0">Completadas: <strong>{{ resumen.completadas }}</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
