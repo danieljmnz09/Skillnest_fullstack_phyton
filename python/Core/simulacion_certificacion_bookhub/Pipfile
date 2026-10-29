@@ -5,10 +5,10 @@ name = "pypi"
 
 [packages]
 python-dotenv = "<2.0,>=1.0"
-flask = "*"
-dotenv = "*"
-pymysql = "*"
 flask-bcrypt = "*"
+flask = "*"
+pymysql = "*"
+dotenv = "*"
 
 [dev-packages]
 
